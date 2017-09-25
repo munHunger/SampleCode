@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory name="localConnection">
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property>
+        <property name="hibernate.connection.driver_class">
+            com.mysql.jdbc.Driver
+        </property>
+
+        <!-- connection string for letting hibernate know where the server is at.
+        note that useSSL is false, this is correct for local database and development. In a production environment this should be set to true
+        Also, note twb part. this is the database schema that must be created before running the application-->
+        <property
+                name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/twb?useSSL=false
+        </property>
+
+        <!-- Username and password of the user created during setup of the mysql server -->
+        <property name="hibernate.connection.username">
+            root
+        </property>
+        <property name="hibernate.connection.password">
+            password
+        </property>
+
+        <!-- for debugging, it is nice to be able to see what SQL is executed by hibernate, so I usually leave this on true -->
+        <property name="show_sql">
+            true
+        </property>
+
+        <!-- List of all classes that you want to be able to save in the database-->
+        <mapping class="se.jayway.twb.Model"/>
+    </session-factory>
+</hibernate-configuration>
